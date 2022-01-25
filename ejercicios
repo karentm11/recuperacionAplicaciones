@@ -1,0 +1,44 @@
+function saveVehiculos(req,res){
+ 
+        const codigo = req.body.codigo;
+	const descripcion = req.body.descripcion;
+	const marca = req.body.marca;
+        const modelo = req.body.modelo;
+        const año= req.body.año;
+// Se Validan los datos
+        if (!codigo && !descripcion && !marca && !modelo&&!año) {
+
+            return res.render('insertarvehiculos', {
+                message: 'Los datos se han ingresado'
+            });
+        }
+conexion.query('SELECT * FROM Vehiculo WHERE Codigo = ? AND Descripcion = ?  AND Marca= ? AND Modelo=? AND Año=? ', [codigo, descripcion, marca, modelo, año], (error, result) => {
+
+            if (result == 0) {
+                conexion.query('INSERT INTO Vehiculo SET ?', {Codigo:codigo, Descripcion:descripcion, Marca:marca, Modelo:modelo, Año:añoil }, (error, results) => {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        res.redirect('/Listvehiculo');
+                    }
+                });
+
+
+
+
+
+
+
+
+function suma(x){
+      var suma = 0
+      for (var i=1; i<=x; i++){
+        if (i%2 == 0) {
+          suma += i
+
+        }
+      }
+      return suma
+    }
+    
+console.log(suma);
